@@ -1,0 +1,22 @@
+lastupdatecheck: 0
+recentrepos:
+- /Users/aleixabengochea/projects/meal-planner
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-nira-config
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-mib-tracing-config
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-ppe-sto-config
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-platform-ingest-config
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-pna-config
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-platform-normalizer-config
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-pdl-config
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-obfcm-config
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-ppe-lhi-config
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-aap-config
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-ppe-traffic-config
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-predictive-maintenance-config
+- /Users/aleixabengochea/audi/IPO/repos/acdc.transformer
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-digest-config
+- /Users/aleixabengochea/audi/IPO/k8s/k8s-theft-protection-config
+startuppopupversion: 5
+customcommandshistory:
+- q
+hidecommandlog: false
