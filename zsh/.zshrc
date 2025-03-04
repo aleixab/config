@@ -1,6 +1,6 @@
 # Set Oh My Zsh and FZF base directories
 export ZSH="$HOME/.oh-my-zsh"
-export FZF_BASE="$HOME/.config/.fzf"
+export FZF_BASE="$HOME/.fzf"
 export COLORTERM="truecolor"
 
 ######################################
@@ -20,6 +20,7 @@ plugins=(
   git
   zsh-vi-mode
   fzf
+  fzf-tab
   kubectl
 )
 
