@@ -45,4 +45,5 @@ return {
     },
     opts = {},
   },
+  { "laktak/tome" },
 }
