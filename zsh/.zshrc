@@ -9,7 +9,6 @@ export COLORTERM="truecolor"
 
 ZSH_THEME="eastwood"
 
-# Adjust key timeout for better Vim keybindings
 KEYTIMEOUT=20
 
 ######################################
@@ -26,9 +25,6 @@ plugins=(
 
 # Source Oh My Zsh
 source $ZSH/oh-my-zsh.sh
-
-# Initialize completion system
-autoload -Uz compinit && compinit -C
 
 ######################################
 #             Aliases
@@ -79,6 +75,8 @@ bindkey -M viins '^[[B' history-beginning-search-forward-end
 # Source FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# fzf --zsh
+
 # Set FZF color scheme
 export FZF_DEFAULT_OPTS="
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8
@@ -91,8 +89,9 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude '.git' . $HOME"
 
 # Bind FZF history widget to Ctrl+R
-zle -N fzy-history-widget
-bindkey -M viins "^R" fzy-history-widget
+zle -N fzf-history-widget
+bindkey -M viins "^R" fzf-history-widget
+bindkey -M vicmd '^R' fzf-history-widget
 
 # Use fd for path and directory completion
 _fzf_compgen_path() {
@@ -106,24 +105,6 @@ _fzf_compgen_dir() {
 ######################################
 #             Z Script
 ######################################
-
-# Source Z script
-. $HOME/.config/scripts/z.sh
-
-# Redefine 'z' and 'zz' functions with FZF integration
-unalias z
-z() {
-  if [[ -z "$*" ]]; then
-    cd "$(_z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
-  else
-    _last_z_args="$@"
-    _z "$@"
-  fi
-}
-
-zz() {
-  cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
-}
 
 alias j=z
 alias jj=zz
@@ -161,10 +142,3 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-######################################
-#             Maven Configuration
-######################################
-
-# Set Maven environment variables
-export M2_HOME='/opt/apache-maven-3.9.9'
-export PATH="$M2_HOME/bin:$PATH"
