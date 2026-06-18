@@ -3,7 +3,7 @@
 set -e
 
 echo "==> Installing system packages..."
-sudo pacman -S --noconfirm --needed stow zoxide mise fzf fd tmux
+sudo pacman -S --noconfirm --needed stow zoxide mise fzf fd tmux neovim
 
 echo "==> Installing oh-my-zsh..."
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
