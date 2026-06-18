@@ -35,7 +35,6 @@ alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias cport='sudo lsof -PiTCP -sTCP:LISTEN'
 alias cat=bat
 alias gita="python3 -m gita"
-alias b="$HOME/.config/scripts/b.rb"
 
 ######################################
 #         Vim Keybindings
@@ -102,11 +101,12 @@ _fzf_compgen_dir() {
 }
 
 ######################################
-#             Z Script
+#             Zoxide
 ######################################
 
+eval "$(zoxide init zsh)"
 alias j=z
-alias jj=zz
+alias jj=zi
 
 ######################################
 #        Kubernetes Completion
@@ -124,20 +124,10 @@ fi
 # Source Gita autocompletions
 [ -f "$HOME/.config/scripts/gita_autocompletions.zsh" ] && source "$HOME/.config/scripts/gita_autocompletions.zsh"
 
-######################################
-#             Go Configuration
-######################################
-
-# Set Go environment variables
-export GOPATH="$HOME/go"
-export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 
 ######################################
-#             NVM Configuration
+#             Mise
 ######################################
 
-# Set NVM directory and load NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+eval "$(mise activate zsh)"
 
