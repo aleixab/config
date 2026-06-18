@@ -3,7 +3,7 @@
 set -e
 
 echo "==> Installing system packages..."
-sudo pacman -S --noconfirm --needed stow zoxide mise fzf fd tmux neovim ripgrep lazygit rust
+sudo pacman -S --noconfirm --needed stow zoxide mise fzf fd tmux neovim ripgrep lazygit rust jq
 
 echo "==> Installing oh-my-zsh..."
 if [ ! -d "$HOME/.oh-my-zsh" ]; then

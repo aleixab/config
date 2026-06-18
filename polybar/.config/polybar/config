@@ -64,7 +64,7 @@ font-4 = FontAwesome5Brands:style=Solid:pixelsize=10;3
 
 
 modules-left = i3 sp2 info-hackspeed sp2
-modules-right = weather sp1 linux-ver sp1 updates sp2 date sp2
+modules-right = eth sp1 wlan sp1 weather sp1 linux-ver sp1 updates sp2 date sp2
 
 tray-position = right
 tray-padding = 0
@@ -139,6 +139,26 @@ label-urgent-padding = 1
 label-separator =
 label-separator-padding = 0
 label-separator-foreground = #fff
+
+[module/eth]
+type = internal/network
+interface = eno1
+interval = 5
+format-connected = " <label-connected>"
+label-connected = %local_ip%
+label-connected-foreground = ${colors.foreground-alt}
+format-disconnected = " down"
+format-disconnected-foreground = ${colors.alert}
+
+[module/wlan]
+type = internal/network
+interface = wlan0
+interval = 5
+format-connected = " <label-connected>"
+label-connected = %essid%
+label-connected-foreground = ${colors.foreground-alt}
+format-disconnected =
+format-disconnected-foreground = ${colors.alert}
 
 [module/info-hackspeed]
 type = custom/script
