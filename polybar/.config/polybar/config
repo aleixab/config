@@ -64,7 +64,7 @@ font-4 = FontAwesome5Brands:style=Solid:pixelsize=10;3
 
 
 modules-left = i3 sp2 info-hackspeed sp2
-modules-right = cpu sp1 mem sp1 temp sp1 disk sp3 eth sp1 wlan sp3 weather sp1 linux-ver sp1 updates sp3 volume sp1 date sp2
+modules-right = cpu sp1 mem sp1 temp sp1 disk sp1 eth sp1 wlan sp1 weather sp1 linux-ver sp1 updates sp1 date sp2
 
 tray-position = right
 tray-padding = 0
