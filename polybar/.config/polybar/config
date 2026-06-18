@@ -184,7 +184,7 @@ interval = 2
 format = "<label>"
 format-prefix = " RAM "
 format-prefix-foreground = ${colors.primary}
-label = %percentage_used%%
+label = %gb_used%/%gb_total%
 label-foreground = ${colors.foreground-alt}
 
 [module/temp]
@@ -209,7 +209,7 @@ mount-0 = /
 format-mounted = "<label-mounted>"
 format-mounted-prefix = " DSK "
 format-mounted-prefix-foreground = ${colors.primary}
-label-mounted = %percentage_used%%
+label-mounted = %used%/%total%
 label-mounted-foreground = ${colors.foreground-alt}
 format-unmounted =
 
