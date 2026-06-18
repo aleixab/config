@@ -39,7 +39,7 @@ echo "==> Stowing dotfiles..."
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-for pkg in zsh tmux fzf scripts nvim lazygit i3 polybar; do
+for pkg in zsh tmux fzf scripts nvim lazygit i3 polybar alacritty; do
   if [ -d "$pkg" ]; then
     stow -t ~ "$pkg" && echo "    stowed $pkg" || echo "    WARNING: $pkg stow failed (conflict?)"
   fi
