@@ -1,3 +1,8 @@
+# Auto-start tmux on new terminal (attach to existing session or create one)
+if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
+  tmux attach -t default 2>/dev/null || tmux new -s default
+fi
+
 # Set Oh My Zsh and FZF base directories
 export ZSH="$HOME/.oh-my-zsh"
 export FZF_BASE="$HOME/.fzf"
