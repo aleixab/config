@@ -3,7 +3,7 @@
 set -e
 
 echo "==> Installing system packages..."
-sudo pacman -S --noconfirm --needed stow zoxide mise fzf fd tmux neovim
+sudo pacman -S --noconfirm --needed stow zoxide mise fzf fd tmux neovim ripgrep lazygit rust
 
 echo "==> Installing oh-my-zsh..."
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -39,11 +39,14 @@ echo "==> Stowing dotfiles..."
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-for pkg in zsh tmux fzf scripts nvim lazygit i3 polybar alacritty; do
+for pkg in zsh tmux fzf scripts nvim lazygit i3 polybar alacritty mise; do
   if [ -d "$pkg" ]; then
     stow -t ~ "$pkg" && echo "    stowed $pkg" || echo "    WARNING: $pkg stow failed (conflict?)"
   fi
 done
+
+echo "==> Installing mise runtimes (node, go)..."
+mise install
 
 echo ""
 echo "Done! Open a new shell to load the config."
