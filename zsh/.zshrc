@@ -33,8 +33,7 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias cport='sudo lsof -PiTCP -sTCP:LISTEN'
-alias bat=batcat
-alias cat=batcat
+alias cat=bat
 alias gita="python3 -m gita"
 alias b="$HOME/.config/scripts/b.rb"
 
