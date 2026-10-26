@@ -39,7 +39,6 @@ alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias cport='sudo lsof -PiTCP -sTCP:LISTEN'
 alias cat=bat
-alias gita="python3 -m gita"
 
 ######################################
 #         Vim Keybindings
@@ -74,11 +73,6 @@ bindkey -M viins '^[[B' history-beginning-search-forward-end
 ######################################
 #             FZF Configuration
 ######################################
-
-# Source FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# fzf --zsh
 
 # Set FZF color scheme
 export FZF_DEFAULT_OPTS="
@@ -121,14 +115,6 @@ alias jj=zi
 if command -v kubectl &>/dev/null; then
   source <(kubectl completion zsh)
 fi
-
-######################################
-#         Gita Autocompletion
-######################################
-
-# Source Gita autocompletions
-[ -f "$HOME/.config/scripts/gita_autocompletions.zsh" ] && source "$HOME/.config/scripts/gita_autocompletions.zsh"
-
 
 ######################################
 #             PATH
