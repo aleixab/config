@@ -8,6 +8,8 @@
 {{- $email := promptStringOnce . "email" "Git email" -}}
 
 sourceDir = {{ .chezmoi.workingTree | quote }}
+# No pager: with `apply -v` it grabs the terminal and eats the sudo password
+pager = ""
 {{- if $yubikey }}
 encryption = "age"
 {{- end }}
