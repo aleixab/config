@@ -49,7 +49,7 @@ writes through them.
 |---|---|---|---|
 | zsh, tmux, nvim, mise, lazygit, git, scripts | ✓ | ✓ | ✓ |
 | alacritty | ✓ | ✓ | |
-| i3, polybar | ✓ | | |
+| i3, polybar, rofi, picom, dunst | ✓ | | |
 
 Depending on the answers to `init`, any machine also gets:
 
@@ -65,9 +65,11 @@ Machine differences live in:
 - `*.tmpl` files: per-machine content (`dot_gitconfig.tmpl`, mise config)
 - `home/.chezmoiscripts/`: install scripts
 
-fzf, ripgrep and age come from mise everywhere, so every machine has the same
-versions. On Ubuntu/WSL neovim and lazygit do too, because the apt versions are
-too old.
+CLI tools (fzf, ripgrep, fd, bat, zoxide, age, node, go) come from mise with
+pinned versions, so every machine runs the same ones. On Ubuntu/WSL neovim and
+lazygit do too, because the apt versions are too old. To upgrade:
+`mise outdated --bump`, then bump the pins with
+`chezmoi edit ~/.config/mise/config.toml`.
 
 ## Daily use
 
@@ -81,3 +83,6 @@ chezmoi diff               # what apply would change
 chezmoi update             # git pull + apply
 chezmoi cd                 # shell in the repo to commit/push
 ```
+
+`add`, `edit` and `re-add` commit automatically (`git.autoCommit`); push with
+`chezmoi git push`.

@@ -20,6 +20,10 @@ encryption = "age"
     sshd = {{ $sshd }}
     name = {{ $name | quote }}
     email = {{ $email | quote }}
+
+# Commit source changes made by chezmoi add/edit/re-add (push stays manual)
+[git]
+    autoCommit = true
 {{- if $yubikey }}
 
 # age-plugin-yubikey only works through the external age binary

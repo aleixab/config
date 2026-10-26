@@ -6,23 +6,34 @@ set -euo pipefail
 
 echo "==> Installing system packages..."
 {{ if .arch -}}
-sudo pacman -S --noconfirm --needed git curl zsh zoxide mise fd bat tmux neovim lazygit rust jq bc fastfetch
+sudo pacman -S --noconfirm --needed git curl zsh mise tmux neovim lazygit rust jq bc fastfetch
+{{- if .gui }}
+# i3 desktop
+sudo pacman -S --noconfirm --needed i3-wm polybar rofi picom dunst feh thunar alacritty ttf-meslo-nerd
+if command -v paru &>/dev/null; then
+  paru -S --noconfirm --needed rofi-games
+fi
+{{- end }}
 {{- if .yubikey }}
 sudo pacman -S --noconfirm --needed yubikey-manager pcsclite ccid libfido2
 sudo systemctl enable --now pcscd.socket
 {{- end }}
 {{- else if eq .chezmoi.osRelease.id "ubuntu" "debian" -}}
 sudo apt-get update
-sudo apt-get install -y git curl zsh zoxide fd-find bat tmux jq bc unzip build-essential
+sudo apt-get install -y git curl zsh tmux jq bc unzip xz-utils build-essential
 {{- if .yubikey }}
 sudo apt-get install -y yubikey-manager pcscd libfido2-1
 sudo systemctl enable --now pcscd.socket
 {{- end }}
+{{- if .gui }}
 
-# Ubuntu renames fd and bat; expose them under their usual names
-mkdir -p "$HOME/.local/bin"
-ln -sf "$(command -v fdfind)" "$HOME/.local/bin/fd"
-ln -sf "$(command -v batcat)" "$HOME/.local/bin/bat"
+# Terminal font (alacritty), not packaged on Ubuntu 22.04
+if ! fc-list | grep -q "MesloLGS Nerd Font Mono"; then
+  mkdir -p "$HOME/.local/share/fonts/meslo"
+  curl -fsSL https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/Meslo.tar.xz | tar -xJ -C "$HOME/.local/share/fonts/meslo"
+  fc-cache -f
+fi
+{{- end }}
 
 if ! command -v mise &>/dev/null && [ ! -x "$HOME/.local/bin/mise" ]; then
   curl -fsSL https://mise.run | sh

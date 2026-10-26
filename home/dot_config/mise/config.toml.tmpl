@@ -1,14 +1,19 @@
+# Pinned so every machine runs the same versions.
+# Upgrade: `mise outdated --bump`, then bump here with `chezmoi edit ~/.config/mise/config.toml`.
 [tools]
-node = "lts"
-go = "latest"
-fzf = "latest"
-ripgrep = "latest"
-age = "latest"
+node = "24.16.0"
+go = "1.26.4"
+fzf = "0.74.5"
+ripgrep = "15.2.0"
+age = "1.3.2"
+fd = "10.5.0"
+bat = "0.26.1"
+zoxide = "0.10.0"
 {{- if not .arch }}
-# Ubuntu's packages are too old for LazyVim, so mise provides these
-neovim = "latest"
-lazygit = "latest"
+# Ubuntu's packages are too old for LazyVim
+neovim = "0.12.6"
+lazygit = "0.66.2"
 {{- end }}
 {{- if .yubikey }}
-age-plugin-yubikey = "latest"
+age-plugin-yubikey = "0.5.1"
 {{- end }}
