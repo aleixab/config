@@ -3,8 +3,8 @@
 
 [[yubikeys]]
 name = "keyring"
-serial = ""
+serial = "40156475"
 
 [[yubikeys]]
 name = "home"
-serial = ""
+serial = "40156456"

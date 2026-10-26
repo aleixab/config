@@ -4,8 +4,8 @@ Two YubiKey 5C NFC keys, set up identically. Either one alone must be able to do
 
 | Name      | Serial        | Where it lives        |
 |-----------|---------------|-----------------------|
-| `keyring` | `<SERIAL>`    | on my keys, daily use |
-| `home`    | `<SERIAL>`    | at home, backup       |
+| `keyring` | `40156475`    | on my keys, daily use |
+| `home`    | `40156456`    | at home, backup       |
 
 Serials are also in `home/.chezmoidata/yubikeys.toml` (used by `~/.ssh/config`).
 
@@ -64,10 +64,10 @@ Host *
   ControlPath ~/.ssh/cm-%C
   ControlPersist 10m
 
-Match exec "ykman list --serials | grep -qx <KEYRING_SERIAL>"
+Match exec "ykman list --serials | grep -qx 40156475"
   IdentityFile ~/.ssh/id_yk_keyring
 
-Match exec "ykman list --serials | grep -qx <HOME_SERIAL>"
+Match exec "ykman list --serials | grep -qx 40156456"
   IdentityFile ~/.ssh/id_yk_home
 ```
 
