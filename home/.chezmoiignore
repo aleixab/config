@@ -6,6 +6,9 @@
 {{- if not (and .gui .arch) }}
 .config/i3
 .config/polybar
+.config/rofi
+.config/picom
+.config/dunst
 {{- end }}
 
 {{- if not .yubikey }}
