@@ -1,0 +1,34 @@
+Host proxmox
+  HostName 192.168.128.200
+  User root
+
+Host infra-svc
+  HostName 192.168.128.201
+  User root
+
+Host jumpbox
+  HostName 192.168.128.210
+  User root
+
+Host ops
+  HostName 192.168.129.11
+  User aleix
+
+# Defaults, keep at the bottom: first value found wins
+
+Host *
+  IdentitiesOnly yes
+  # ssh-agent can't prompt for the FIDO2 PIN, so ssh does it directly
+  IdentityAgent none
+  ControlMaster auto
+  ControlPath ~/.ssh/cm-%C
+  ControlPersist 10m
+
+# Offer only the handle for whichever key is plugged in: one PIN, one touch
+{{- range .yubikeys }}
+{{- if .serial }}
+
+Match exec "ykman list --serials | grep -qx {{ .serial }}"
+  IdentityFile ~/.ssh/id_yk_{{ .name }}
+{{- end }}
+{{- end }}

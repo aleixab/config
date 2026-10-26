@@ -2,14 +2,29 @@
 {{- $idLike := .chezmoi.osRelease.idLike | default "" -}}
 {{- $arch := or (eq .chezmoi.osRelease.id "arch") (contains "arch" $idLike) -}}
 {{- $gui := promptBoolOnce . "gui" "Desktop machine with a GUI" (not $wsl) -}}
+{{- $yubikey := promptBoolOnce . "yubikey" "Use YubiKeys for SSH and age" (not $wsl) -}}
+{{- $sshd := promptBoolOnce . "sshd" "Accept SSH logins (authorized_keys from GitHub)" false -}}
 {{- $name := promptStringOnce . "name" "Git name" "Aleix" -}}
 {{- $email := promptStringOnce . "email" "Git email" -}}
 
 sourceDir = {{ .chezmoi.workingTree | quote }}
+{{- if $yubikey }}
+encryption = "age"
+{{- end }}
 
 [data]
     wsl = {{ $wsl }}
     arch = {{ $arch }}
     gui = {{ $gui }}
+    yubikey = {{ $yubikey }}
+    sshd = {{ $sshd }}
     name = {{ $name | quote }}
     email = {{ $email | quote }}
+{{- if $yubikey }}
+
+# age-plugin-yubikey only works through the external age binary
+[age]
+    command = "age"
+    identity = {{ joinPath .chezmoi.homeDir ".config/age/yubikeys.txt" | quote }}
+    recipientsFile = {{ joinPath .chezmoi.homeDir ".config/age/recipients.txt" | quote }}
+{{- end }}

@@ -7,3 +7,11 @@
 .config/i3
 .config/polybar
 {{- end }}
+
+{{- if not .yubikey }}
+.ssh/config
+{{- end }}
+
+{{- if not .sshd }}
+.ssh/authorized_keys
+{{- end }}

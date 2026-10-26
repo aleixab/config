@@ -7,9 +7,18 @@ set -euo pipefail
 echo "==> Installing system packages..."
 {{ if .arch -}}
 sudo pacman -S --noconfirm --needed git curl zsh zoxide mise fzf fd bat tmux neovim ripgrep lazygit rust jq bc fastfetch
+{{- if .yubikey }}
+sudo pacman -S --noconfirm --needed yubikey-manager age age-plugin-yubikey pcsclite ccid libfido2
+sudo systemctl enable --now pcscd.socket
+{{- end }}
 {{- else if eq .chezmoi.osRelease.id "ubuntu" "debian" -}}
 sudo apt-get update
 sudo apt-get install -y git curl zsh zoxide fd-find bat tmux ripgrep jq bc unzip build-essential
+{{- if .yubikey }}
+# age and age-plugin-yubikey come from mise
+sudo apt-get install -y yubikey-manager pcscd libfido2-1
+sudo systemctl enable --now pcscd.socket
+{{- end }}
 
 # Ubuntu renames fd and bat; expose them under their usual names
 mkdir -p "$HOME/.local/bin"

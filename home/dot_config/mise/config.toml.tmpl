@@ -6,4 +6,8 @@ go = "latest"
 neovim = "latest"
 lazygit = "latest"
 fzf = "latest"
+{{- if .yubikey }}
+age = "latest"
+age-plugin-yubikey = "latest"
+{{- end }}
 {{- end }}

@@ -51,6 +51,13 @@ writes through them.
 | alacritty | ✓ | ✓ | |
 | i3, polybar | ✓ | | |
 
+Depending on the answers to `init`, any machine also gets:
+
+- "Use YubiKeys": YubiKey packages, `~/.ssh/config`, age setup
+- "Accept SSH logins": `~/.ssh/authorized_keys` from GitHub (YubiKey keys only)
+
+YubiKey details (SSH, age, recovery): [docs/yubikey.md](docs/yubikey.md).
+
 Machine differences live in:
 
 - `home/.chezmoi.toml.tmpl`: per-machine data (`wsl`, `arch`, `gui`, `name`, `email`)

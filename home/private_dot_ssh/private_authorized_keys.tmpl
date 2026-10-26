@@ -1,0 +1,7 @@
+# Managed by chezmoi: YubiKey (sk-*) keys from github.com/aleixab.keys.
+# Hand-added keys here are overwritten on apply.
+{{ range gitHubKeys "aleixab" -}}
+{{ if hasPrefix "sk-" .Key -}}
+{{ .Key }}
+{{ end -}}
+{{ end -}}

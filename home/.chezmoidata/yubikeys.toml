@@ -1,0 +1,10 @@
+# Both YubiKeys. Serials from `ykman list --serials`; see docs/yubikey.md.
+# An empty serial means "not filled in yet" and its ssh Match block is skipped.
+
+[[yubikeys]]
+name = "keyring"
+serial = ""
+
+[[yubikeys]]
+name = "home"
+serial = ""
