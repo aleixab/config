@@ -11,4 +11,13 @@ echo "==> Installing mise runtimes..."
 mise install
 
 echo "==> Installing tmux plugins..."
+# TPM needs a tmux server that has loaded tmux.conf
+if tmux has-session 2>/dev/null; then
+  tmux source-file "$HOME/.tmux.conf"
+  started=""
+else
+  tmux new-session -d -s tpm-install
+  started=1
+fi
 "$HOME/.tmux/plugins/tpm/bin/install_plugins" || echo "    TPM failed; press prefix + I inside tmux"
+[ -z "$started" ] || tmux kill-session -t tpm-install
