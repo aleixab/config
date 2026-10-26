@@ -126,3 +126,23 @@ alias jj=zi
 ######################################
 
 command -v fastfetch &>/dev/null && fastfetch
+
+######################################
+#        Dotfiles reminder
+######################################
+
+# Warn when the dotfiles repo has work that isn't on GitHub, or ~ drifted from it
+_dotfiles_check() {
+  local src=$HOME/config n
+  [[ -d $src/.git ]] || src=$HOME/.local/share/chezmoi
+  [[ -d $src/.git ]] || return
+
+  n=$(git -C $src status --porcelain 2>/dev/null | wc -l)
+  (( n )) && print -P "%F{yellow}dotfiles:%f $n uncommitted change(s) -> chezmoi cd, then git add -A && git commit"
+  n=$(git -C $src rev-list --count @{u}..HEAD 2>/dev/null)
+  (( n )) && print -P "%F{yellow}dotfiles:%f $n unpushed commit(s) -> chezmoi git push"
+  n=$(chezmoi status --exclude scripts 2>/dev/null | wc -l)
+  (( n )) && print -P "%F{yellow}dotfiles:%f $n file(s) differ from the repo -> chezmoi diff, then chezmoi apply (keep repo) or chezmoi re-add (keep ~)"
+}
+_dotfiles_check
+unfunction _dotfiles_check

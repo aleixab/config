@@ -86,3 +86,38 @@ chezmoi cd                 # shell in the repo to commit/push
 
 `add`, `edit` and `re-add` commit automatically (`git.autoCommit`); push with
 `chezmoi git push`.
+
+## Routine
+
+Every new shell warns (in yellow, with the command to run) when:
+
+- the repo has uncommitted changes: `chezmoi cd`, then `git add -A && git commit`
+- there are unpushed commits: `chezmoi git push`
+- files in `~` differ from the repo: `chezmoi diff`, then `chezmoi apply`
+  (keep the repo version) or `chezmoi re-add` (keep the `~` version)
+
+Habit: when you change a config, use `chezmoi edit` (or `re-add` afterwards) and
+push the same day. On the other machines, `chezmoi update` pulls and applies.
+
+Upgrades, once a month or so:
+
+```sh
+mise outdated --bump                        # what's newer than the pins
+chezmoi edit ~/.config/mise/config.toml     # bump the pins, then `chezmoi apply`
+nvim +'Lazy sync'                           # update plugins
+chezmoi re-add ~/.config/nvim/lazy-lock.json
+chezmoi git push
+```
+
+Then `chezmoi update` on the other machines.
+
+## Notes for later
+
+- **Secrets**: anything sensitive (tokens, kubeconfig) goes in with
+  `chezmoi add --encrypt <file>`. It is encrypted to both YubiKeys with age, so
+  it's safe in this public repo; decrypting it on `apply`/`diff` needs PIN +
+  touch. See [docs/yubikey.md](docs/yubikey.md).
+- **Commit signing with the YubiKey** (not enabled): could be added to
+  `dot_gitconfig.tmpl` for YubiKey machines only (`gpg.format = ssh`,
+  `user.signingkey`, `commit.gpgsign`). Costs a touch on every commit,
+  including chezmoi's auto-commits. Commands in [docs/yubikey.md](docs/yubikey.md).
