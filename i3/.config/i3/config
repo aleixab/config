@@ -6,6 +6,9 @@ floating_modifier $mod
 set $term alacritty
 bindsym $mod+Return exec $term
 
+# start file manager
+bindsym $mod+Shift+f exec thunar
+
 # kill focused window
 bindsym $mod+q kill
 
@@ -13,6 +16,9 @@ bindsym $mod+q kill
 #bindsym ctrl+space exec rofi -show run
 bindsym ctrl+space exec "rofi -show combi -modi window,run,combi -combi-modi window,run"
 #bindsym ctrl+space exec dmenu_run
+
+# game launcher (rofi-games)
+bindsym $mod+g exec --no-startup-id rofi -modes games -show games -theme games-default
 
 # vim-style focus (hjkl)
 bindsym $mod+h focus left
