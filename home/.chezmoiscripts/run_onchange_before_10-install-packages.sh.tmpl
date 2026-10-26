@@ -1,0 +1,42 @@
+#!/bin/bash
+# Installs system packages, oh-my-zsh and its plugins, and TPM.
+# Re-runs whenever this file changes.
+
+set -euo pipefail
+
+echo "==> Installing system packages..."
+{{ if .arch -}}
+sudo pacman -S --noconfirm --needed git curl zsh zoxide mise fzf fd bat tmux neovim ripgrep lazygit rust jq bc fastfetch
+{{- else if eq .chezmoi.osRelease.id "ubuntu" "debian" -}}
+sudo apt-get update
+sudo apt-get install -y git curl zsh zoxide fd-find bat tmux ripgrep jq bc unzip build-essential
+
+# Ubuntu renames fd and bat; expose them under their usual names
+mkdir -p "$HOME/.local/bin"
+ln -sf "$(command -v fdfind)" "$HOME/.local/bin/fd"
+ln -sf "$(command -v batcat)" "$HOME/.local/bin/bat"
+
+if ! command -v mise &>/dev/null && [ ! -x "$HOME/.local/bin/mise" ]; then
+  curl -fsSL https://mise.run | sh
+fi
+{{- else -}}
+echo "    unknown distro {{ .chezmoi.osRelease.id }}, skipping system packages"
+{{- end }}
+
+echo "==> Installing oh-my-zsh..."
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh "$HOME/.oh-my-zsh"
+fi
+
+echo "==> Installing zsh plugins..."
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+[ -d "$ZSH_CUSTOM/plugins/zsh-vi-mode" ] || git clone https://github.com/jeffreytse/zsh-vi-mode "$ZSH_CUSTOM/plugins/zsh-vi-mode"
+[ -d "$ZSH_CUSTOM/plugins/fzf-tab" ] || git clone https://github.com/Aloxaf/fzf-tab "$ZSH_CUSTOM/plugins/fzf-tab"
+
+echo "==> Installing TPM (tmux plugin manager)..."
+[ -d "$HOME/.tmux/plugins/tpm/.git" ] || { rm -rf "$HOME/.tmux/plugins/tpm"; git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"; }
+
+if [ "$(basename "${SHELL:-}")" != "zsh" ]; then
+  echo "==> Setting zsh as default shell..."
+  chsh -s "$(command -v zsh)"
+fi

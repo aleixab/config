@@ -1,0 +1,15 @@
+{{- $wsl := .chezmoi.kernel.osrelease | lower | contains "microsoft" -}}
+{{- $idLike := .chezmoi.osRelease.idLike | default "" -}}
+{{- $arch := or (eq .chezmoi.osRelease.id "arch") (contains "arch" $idLike) -}}
+{{- $gui := promptBoolOnce . "gui" "Desktop machine with a GUI" (not $wsl) -}}
+{{- $name := promptStringOnce . "name" "Git name" "Aleix" -}}
+{{- $email := promptStringOnce . "email" "Git email" -}}
+
+sourceDir = {{ .chezmoi.workingTree | quote }}
+
+[data]
+    wsl = {{ $wsl }}
+    arch = {{ $arch }}
+    gui = {{ $gui }}
+    name = {{ $name | quote }}
+    email = {{ $email | quote }}

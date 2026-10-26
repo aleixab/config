@@ -1,0 +1,9 @@
+{{- if not .gui }}
+.config/alacritty
+{{- end }}
+
+{{- /* i3 setup only lives on the Arch/CachyOS box for now */}}
+{{- if not (and .gui .arch) }}
+.config/i3
+.config/polybar
+{{- end }}

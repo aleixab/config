@@ -1,0 +1,14 @@
+#!/bin/bash
+# Installs mise runtimes and tmux plugins.
+# Re-runs when the mise config or tmux plugin list changes:
+# mise: {{ include "dot_config/mise/config.toml.tmpl" | sha256sum }}
+# tmux: {{ include "dot_tmux.conf" | sha256sum }}
+
+set -euo pipefail
+export PATH="$HOME/.local/bin:$PATH"
+
+echo "==> Installing mise runtimes..."
+mise install
+
+echo "==> Installing tmux plugins..."
+"$HOME/.tmux/plugins/tpm/bin/install_plugins" || echo "    TPM failed; press prefix + I inside tmux"

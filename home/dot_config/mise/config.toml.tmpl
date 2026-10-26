@@ -1,0 +1,9 @@
+[tools]
+node = "lts"
+go = "latest"
+{{- if not .arch }}
+# Ubuntu's packages are too old for LazyVim and friends, so mise provides them
+neovim = "latest"
+lazygit = "latest"
+fzf = "latest"
+{{- end }}

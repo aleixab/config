@@ -148,4 +148,4 @@ eval "$(mise activate zsh)"
 #             Greeting
 ######################################
 
-fastfetch
+command -v fastfetch &>/dev/null && fastfetch

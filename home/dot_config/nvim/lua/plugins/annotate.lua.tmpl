@@ -16,8 +16,8 @@
 -- lualine component. (A plugins file may return one spec or a list of them.)
 return {
   {
-    dir = "/home/aleix/Projects/notes", -- local path to this repo
-    cond = vim.fn.isdirectory("/home/aleix/Projects/notes") == 1, -- skip on machines without it
+    dir = "{{ .chezmoi.homeDir }}/Projects/notes", -- local path to this repo
+    cond = vim.fn.isdirectory("{{ .chezmoi.homeDir }}/Projects/notes") == 1, -- skip on machines without it
     dependencies = { "ibhagwan/fzf-lua" }, -- LazyVim already has this if fzf is your picker
     build = "go build -o nvim-annotate ./cmd/nvim-annotate", -- compiles into the repo dir
     -- load on file open + when a command/key is used
@@ -62,7 +62,7 @@ return {
     },
     opts = {
       -- point at the binary lazy just built (absolute path = no PATH needed)
-      bin = "/home/aleix/Projects/notes/nvim-annotate",
+      bin = "{{ .chezmoi.homeDir }}/Projects/notes/nvim-annotate",
 
       -- ---- optional tuning (defaults shown) ----
       -- section_style = "bar",     -- "bar" (gutter stripe) | "tint" | "both"
