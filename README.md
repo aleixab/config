@@ -15,9 +15,33 @@ chezmoi init --apply aleixab/config
 ```
 
 `init` asks a few questions once per machine (GUI or not, git name/email) and
-stores the answers in `~/.config/chezmoi/chezmoi.toml`. `apply` then installs
-packages (pacman or apt), oh-my-zsh + plugins, TPM, mise runtimes, and writes
-all the configs.
+stores the answers in `~/.config/chezmoi/chezmoi.toml`. `apply` then runs, in order:
+
+1. `10-install-packages`: system packages (pacman or apt), oh-my-zsh +
+   plugins, TPM, zsh as login shell. Asks for sudo.
+2. Writes all config files.
+3. `20-install-tools`: `mise install` and tmux plugins.
+
+Afterwards:
+
+- Log out and back in (or open a new terminal) so zsh and mise load
+- Start `nvim` once and let lazy.nvim install plugins
+- If tmux plugins are missing, press `prefix + I` inside tmux
+
+Scripts re-run automatically when they (or the mise config / tmux.conf) change.
+
+### Machine that already has configs
+
+Check what would be overwritten before applying:
+
+```sh
+chezmoi init aleixab/config   # no --apply
+chezmoi diff
+chezmoi apply                 # asks before overwriting files changed locally
+```
+
+Remove old Stow symlinks first (`stow -D -t ~ <pkg>`), otherwise chezmoi
+writes through them.
 
 ## What goes where
 
