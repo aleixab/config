@@ -1,13 +1,14 @@
 [tools]
 node = "lts"
 go = "latest"
+fzf = "latest"
+ripgrep = "latest"
+age = "latest"
 {{- if not .arch }}
-# Ubuntu's packages are too old for LazyVim and friends, so mise provides them
+# Ubuntu's packages are too old for LazyVim, so mise provides these
 neovim = "latest"
 lazygit = "latest"
-fzf = "latest"
-{{- if .yubikey }}
-age = "latest"
-age-plugin-yubikey = "latest"
 {{- end }}
+{{- if .yubikey }}
+age-plugin-yubikey = "latest"
 {{- end }}

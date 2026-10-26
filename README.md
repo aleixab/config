@@ -65,8 +65,9 @@ Machine differences live in:
 - `*.tmpl` files: per-machine content (`dot_gitconfig.tmpl`, mise config)
 - `home/.chezmoiscripts/`: install scripts
 
-On Ubuntu/WSL, neovim, lazygit and fzf come from mise because the apt versions
-are too old.
+fzf, ripgrep and age come from mise everywhere, so every machine has the same
+versions. On Ubuntu/WSL neovim and lazygit do too, because the apt versions are
+too old.
 
 ## Daily use
 

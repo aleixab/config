@@ -32,11 +32,11 @@ Secrets:
 Installed by `chezmoi apply` on machines that answered yes to "Use YubiKeys"
 (see `home/.chezmoiscripts/`). By hand on CachyOS / Arch:
 ```
-sudo pacman -S yubikey-manager age age-plugin-yubikey pcsclite ccid libfido2
+sudo pacman -S yubikey-manager pcsclite ccid libfido2
 sudo systemctl enable --now pcscd.socket
 ```
-On Ubuntu, `yubikey-manager pcscd libfido2-1` come from apt and `age` /
-`age-plugin-yubikey` from mise.
+On Ubuntu: `yubikey-manager pcscd libfido2-1` from apt. On both, `age` and
+`age-plugin-yubikey` come from mise (`~/.config/mise/config.toml`).
 
 - SSH (FIDO2) only needs `libfido2`; it talks USB HID, not PC/SC.
 - age (PIV) needs `age-plugin-yubikey` + `pcscd`.
