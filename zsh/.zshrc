@@ -131,6 +131,14 @@ fi
 
 
 ######################################
+#             PATH
+######################################
+
+# Before mise activate so mise-managed tools take precedence
+export WASMTIME_HOME="$HOME/.wasmtime"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$WASMTIME_HOME/bin:$HOME/.opencode/bin:$PATH"
+
+######################################
 #             Mise
 ######################################
 
@@ -141,4 +149,3 @@ eval "$(mise activate zsh)"
 ######################################
 
 fastfetch
-
